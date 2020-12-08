@@ -1,5 +1,6 @@
 class ScreenArguments {
+  final int id;
   final String title;
 
-  ScreenArguments(this.title);
+  ScreenArguments(this.id, this.title);
 }

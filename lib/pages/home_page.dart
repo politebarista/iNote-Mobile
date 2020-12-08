@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.pushNamed(
                       context,
                       '/view',
-                      arguments: ScreenArguments(res.title),
+                      arguments: ScreenArguments(index, res.title),
                     );
                   },
                   child: Dismissible(

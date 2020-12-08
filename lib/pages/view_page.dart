@@ -18,10 +18,12 @@ class ViewPage extends StatelessWidget {
             children: <Widget>[
               Container(
                 child: ListTile(
-                  title: Text(
-                      box.getAt(0).title == null ? '' : box.getAt(0).title),
-                  subtitle:
-                      Text(box.getAt(0).desc == null ? '' : box.getAt(0).desc),
+                  title: Text(box.getAt(args.id).title == null
+                      ? ''
+                      : box.getAt(args.id).title),
+                  subtitle: Text(box.getAt(args.id).desc == null
+                      ? ''
+                      : box.getAt(args.id).desc),
                 ),
               ),
             ],
