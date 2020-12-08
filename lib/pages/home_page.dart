@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:i_note_mobile/models/note.dart';
+import 'package:i_note_mobile/models/screen_arguments.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -24,15 +25,24 @@ class _HomePageState extends State<HomePage> {
               itemCount: box.values.length,
               itemBuilder: (context, index) {
                 Note res = box.getAt(index);
-                return Dismissible(
-                  background: Container(color: Colors.red),
-                  key: UniqueKey(),
-                  onDismissed: (direction) {
-                    res.delete();
+                return FlatButton(
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/view',
+                      arguments: ScreenArguments(res.title),
+                    );
                   },
-                  child: ListTile(
-                    title: Text(res.title == null ? '' : res.title),
-                    subtitle: Text(res.desc == null ? '' : res.desc),
+                  child: Dismissible(
+                    background: Container(color: Colors.red),
+                    key: UniqueKey(),
+                    onDismissed: (direction) {
+                      res.delete();
+                    },
+                    child: ListTile(
+                      title: Text(res.title == null ? '' : res.title),
+                      subtitle: Text(res.desc == null ? '' : res.desc),
+                    ),
                   ),
                 );
               });
