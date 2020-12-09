@@ -31,8 +31,8 @@ class _ChangePageState extends State<ChangePage> {
       mainTitle = Hive.box<Note>('note_box').getAt(args.id).title;
       mainDesc = Hive.box<Note>('note_box').getAt(args.id).desc;
       mainColor = Hive.box<Note>('note_box').getAt(args.id).color;
-      id = args.id;
     }
+    id = args.id;
     status = args.status;
 
     return Scaffold(
@@ -47,6 +47,7 @@ class _ChangePageState extends State<ChangePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                Text('$status - $id'),
                 TextFormField(
                   autofocus: true,
                   initialValue: '',
@@ -104,8 +105,8 @@ class _ChangePageState extends State<ChangePage> {
   }
 
   void _onFormSubmit() {
-    Box<Note> contactsBox = Hive.box<Note>('note_box');
-    contactsBox.add(
+    Box<Note> noteBox = Hive.box<Note>('note_box');
+    noteBox.add(
       Note(
         title: title,
         desc: desc,
@@ -125,8 +126,8 @@ class _ChangePageState extends State<ChangePage> {
   }
 
   void _onFormChange() {
-    Box<Note> contactsBox = Hive.box<Note>('note_box');
-    contactsBox.put(
+    Box<Note> noteBox = Hive.box<Note>('note_box');
+    noteBox.putAt(
       id,
       Note(
         title: title,
