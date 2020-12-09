@@ -27,19 +27,12 @@ class _ChangePageState extends State<ChangePage> {
   Widget build(BuildContext context) {
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
 
-    switch (args.status) {
-      case ('changing'):
-        mainTitle = Hive.box<Note>('note_box').getAt(args.id).title;
-        mainDesc = Hive.box<Note>('note_box').getAt(args.id).desc;
-        mainColor = Hive.box<Note>('note_box').getAt(args.id).color;
-        id = args.id;
-        status = args.status;
-        break;
-      case ('creating'):
-        mainTitle = 'Название';
-        mainDesc = 'Текст';
-        mainColor = 'amber';
-        break;
+    if (args.status == 'changing') {
+      mainTitle = Hive.box<Note>('note_box').getAt(args.id).title;
+      mainDesc = Hive.box<Note>('note_box').getAt(args.id).desc;
+      mainColor = Hive.box<Note>('note_box').getAt(args.id).color;
+      id = args.id;
+      status = args.status;
     }
 
     return Scaffold(
