@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.pushNamed(
                       context,
                       '/view',
-                      arguments: ScreenArguments(index, res.title),
+                      arguments: ScreenArguments('viewing', index, res.title),
                     );
                   },
                   child: Dismissible(
@@ -48,17 +48,13 @@ class _HomePageState extends State<HomePage> {
               });
         },
       ),
-      // body: Center(
-      //   child: RaisedButton(
-      //     onPressed: () {
-      //       Navigator.pushNamed(context, '/view');
-      //     },
-      //     child: Text('Открыть второе окно'),
-      //   ),
-      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/change');
+          Navigator.pushNamed(
+            context,
+            '/change',
+            arguments: ScreenArguments('creating'),
+          );
         },
         tooltip: 'Создание новой заметки',
         child: Icon(

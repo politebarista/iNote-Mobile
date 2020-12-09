@@ -30,12 +30,21 @@ class ViewPage extends StatelessWidget {
           );
         },
       ),
-      // body: Center(
-      //     child: RaisedButton(
-      //         onPressed: () {
-      //           Navigator.pop(context);
-      //         },
-      //         child: Text('Назад'))),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            '/change',
+            arguments:
+                ScreenArguments('changing', args.id, 'Редактировать заметку'),
+          );
+        },
+        tooltip: 'Создание новой заметки',
+        child: Icon(
+          Icons.edit,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }
