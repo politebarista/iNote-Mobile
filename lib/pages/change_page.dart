@@ -36,63 +36,80 @@ class _ChangePageState extends State<ChangePage> {
     id = args.id;
     status = args.status;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(args.title != null ? args.title : 'Создание новой заметки'),
-      ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                // Text('$status - $id'),
-                TextFormField(
-                  autofocus: true,
-                  initialValue: '',
-                  decoration: const InputDecoration(
-                    labelText: 'Название',
+    return WillPopScope(
+      onWillPop: () async {
+        if (title == null || desc == null) {
+          Navigator.of(context).pop();
+        } else {
+          status == 'creating'
+              ? Navigator.of(context).pop()
+              : _validateAndSave();
+        }
+
+        // Замена события
+        // Navigator.of(context).pop();
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title:
+              Text(args.title != null ? args.title : 'Создание новой заметки'),
+        ),
+        body: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  // Text('$status - $id'),
+                  Text('$title - $desc'),
+                  TextFormField(
+                    autofocus: true,
+                    initialValue: '',
+                    decoration: const InputDecoration(
+                      labelText: 'Название',
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        title = value;
+                      });
+                    },
+                    validator: (val) {
+                      return val.trim().isEmpty
+                          ? 'Название не должно быть пустым'
+                          : null;
+                    },
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      title = value;
-                    });
-                  },
-                  validator: (val) {
-                    return val.trim().isEmpty
-                        ? 'Название не должно быть пустым'
-                        : null;
-                  },
-                ),
-                TextFormField(
-                  initialValue: '',
-                  decoration: const InputDecoration(
-                    labelText: 'Текст',
+                  TextFormField(
+                    initialValue: '',
+                    decoration: const InputDecoration(
+                      labelText: 'Текст',
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        desc = value;
+                      });
+                    },
+                    validator: (val) {
+                      return val.trim().isEmpty
+                          ? 'Текст не должен быть пустым'
+                          : null;
+                    },
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      desc = value;
-                    });
-                  },
-                  validator: (val) {
-                    return val.trim().isEmpty
-                        ? 'Текст не должен быть пустым'
-                        : null;
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _validateAndSave,
-        tooltip: 'Сохранение',
-        child: Icon(
-          Icons.save,
-          color: Colors.white,
+        floatingActionButton: FloatingActionButton(
+          onPressed: _validateAndSave,
+          tooltip: 'Сохранение',
+          child: Icon(
+            Icons.save,
+            color: Colors.white,
+          ),
         ),
       ),
     );
@@ -123,7 +140,8 @@ class _ChangePageState extends State<ChangePage> {
 
   void _checkChanges() {
     if (mainTitle != title || mainDesc != desc || mainColor != color) {
-      _onFormChange();
+      _showMyDialog();
+      // _onFormChange();
     } else {
       _onFormChange();
     }
@@ -142,5 +160,42 @@ class _ChangePageState extends State<ChangePage> {
       ),
     );
     Navigator.of(context).pop();
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          // title: Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Были внесены изменения.'),
+                Text('Сохранить их?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Сохранить'),
+              onPressed: () {
+                // Navigator.of(context).pop();
+                _onFormChange();
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('Не сохранять'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
