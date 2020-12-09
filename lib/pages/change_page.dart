@@ -82,15 +82,17 @@ class _ChangePageState extends State<ChangePage> {
                         : null;
                   },
                 ),
-                OutlineButton(
-                  child: Text(status == 'creating'
-                      ? 'Добавить к списку'
-                      : 'Сохранить изменения'),
-                  onPressed: _validateAndSave,
-                ),
               ],
             ),
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _validateAndSave,
+        tooltip: 'Сохранение',
+        child: Icon(
+          Icons.save,
+          color: Colors.white,
         ),
       ),
     );
