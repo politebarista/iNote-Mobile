@@ -32,8 +32,8 @@ class _ChangePageState extends State<ChangePage> {
       mainDesc = Hive.box<Note>('note_box').getAt(args.id).desc;
       mainColor = Hive.box<Note>('note_box').getAt(args.id).color;
       id = args.id;
-      status = args.status;
     }
+    status = args.status;
 
     return Scaffold(
       appBar: AppBar(
