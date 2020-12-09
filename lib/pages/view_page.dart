@@ -11,17 +11,26 @@ class ViewPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(args.title)),
-      body: ValueListenableBuilder(
-        valueListenable: Hive.box<Note>('note_box').listenable(),
-        builder: (context, Box<Note> box, _) {
-          return Column(
-            children: <Widget>[
-              Text(box.getAt(args.id).title),
-              Text(box.getAt(args.id).desc),
-              Text(box.getAt(args.id).lastChange),
-            ],
-          );
-        },
+      body: Container(
+        padding: EdgeInsets.only(
+          left: 15.0,
+          top: 10.0,
+          right: 15.0,
+        ),
+        child: ValueListenableBuilder(
+          valueListenable: Hive.box<Note>('note_box').listenable(),
+          builder: (context, Box<Note> box, _) {
+            return Container(
+              child: Column(
+                children: <Widget>[
+                  Text(box.getAt(args.id).title),
+                  Text(box.getAt(args.id).desc),
+                  Text(box.getAt(args.id).lastChange),
+                ],
+              ),
+            );
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

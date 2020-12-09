@@ -15,7 +15,6 @@ class _ChangePageState extends State<ChangePage> {
   String title;
   String desc;
   String color = 'blue';
-  String lastChange = 'some date'; // заменить
 
   int id;
   String status;
