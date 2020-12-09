@@ -10,6 +10,8 @@ class ChangePage extends StatefulWidget {
 }
 
 class _ChangePageState extends State<ChangePage> {
+  var currDt = DateTime.now();
+
   String title;
   String desc;
   String color = 'blue';
@@ -47,7 +49,7 @@ class _ChangePageState extends State<ChangePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('$status - $id'),
+                // Text('$status - $id'),
                 TextFormField(
                   autofocus: true,
                   initialValue: '',
@@ -111,7 +113,8 @@ class _ChangePageState extends State<ChangePage> {
         title: title,
         desc: desc,
         color: color,
-        lastChange: lastChange,
+        lastChange:
+            '${currDt.hour + 7}:${currDt.minute} - ${currDt.day}.${currDt.month}.${currDt.year}',
       ),
     );
     Navigator.of(context).pop();
@@ -133,7 +136,8 @@ class _ChangePageState extends State<ChangePage> {
         title: title,
         desc: desc,
         color: color,
-        lastChange: lastChange,
+        lastChange:
+            '${currDt.hour + 7}:${currDt.minute} - ${currDt.day}.${currDt.month}.${currDt.year}',
       ),
     );
     Navigator.of(context).pop();

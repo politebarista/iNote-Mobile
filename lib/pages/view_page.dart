@@ -14,18 +14,11 @@ class ViewPage extends StatelessWidget {
       body: ValueListenableBuilder(
         valueListenable: Hive.box<Note>('note_box').listenable(),
         builder: (context, Box<Note> box, _) {
-          return ListView(
+          return Column(
             children: <Widget>[
-              Container(
-                child: ListTile(
-                  title: Text(box.getAt(args.id).title == null
-                      ? ''
-                      : box.getAt(args.id).title),
-                  subtitle: Text(box.getAt(args.id).desc == null
-                      ? ''
-                      : box.getAt(args.id).desc),
-                ),
-              ),
+              Text(box.getAt(args.id).title),
+              Text(box.getAt(args.id).desc),
+              Text(box.getAt(args.id).lastChange),
             ],
           );
         },
