@@ -104,7 +104,10 @@ class _ChangePageState extends State<ChangePage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: _validateAndSave,
+          onPressed: () {
+            if (status == 'changing') status = 'saving';
+            _validateAndSave();
+          },
           tooltip: 'Сохранение',
           child: Icon(
             Icons.save,
@@ -118,9 +121,21 @@ class _ChangePageState extends State<ChangePage> {
   void _validateAndSave() {
     final form = _formKey.currentState;
     if (form.validate()) {
-      status == 'creating' ? _onFormSubmit() : _checkChanges();
+      switch (status) {
+        case 'creating':
+          _onFormSubmit();
+          break;
+        case 'changing':
+          _checkChanges();
+          break;
+        case 'saving':
+          _onFormChange();
+          break;
+      }
+      // status == 'creating' ? _onFormSubmit() : _checkChanges();
     } else {
-      print('Форма заполнена неверно'); // желательно заменить
+      print(
+          'Форма заполнена неверно'); // желательно заменить на всплывающий бар
     }
   }
 
