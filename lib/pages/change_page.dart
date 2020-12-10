@@ -14,7 +14,7 @@ class _ChangePageState extends State<ChangePage> {
 
   String title;
   String desc;
-  String color = 'blue';
+  var color = 'red';
 
   int id;
   String status;
@@ -95,6 +95,10 @@ class _ChangePageState extends State<ChangePage> {
                           : null;
                     },
                   ),
+                  TextButton(
+                    onPressed: _askedToLead,
+                    child: Text('Цвет'),
+                  ),
                 ],
               ),
             ),
@@ -113,6 +117,67 @@ class _ChangePageState extends State<ChangePage> {
         ),
       ),
     );
+  }
+
+  void _askedToLead() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            title: Text('Выбор цвета'),
+            children: <Widget>[
+              SimpleDialogOption(
+                onPressed: () {
+                  color = 'red';
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Красный'),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  color = 'orange';
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Оранжевый'),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  color = 'yellow';
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Желтый'),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  color = 'green';
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Зеленый'),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  color = 'blue';
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Синий'),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  color = 'purple';
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Фиолетовый'),
+              ),
+              SimpleDialogOption(
+                onPressed: () {
+                  color = 'white';
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Белый'),
+              ),
+            ],
+          );
+        });
   }
 
   void _validateAndSave() {

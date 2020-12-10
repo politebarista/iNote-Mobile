@@ -44,6 +44,7 @@ class ViewPage extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
+                  Text(box.getAt(args.id).color),
                 ],
               ),
             );

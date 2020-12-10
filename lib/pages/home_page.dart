@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
               itemCount: box.values.length,
               itemBuilder: (context, index) {
                 Note res = box.getAt(index);
+                // var color = Color(res.color);
                 return FlatButton(
                   onPressed: () {
                     Navigator.pushNamed(
@@ -40,7 +41,10 @@ class _HomePageState extends State<HomePage> {
                       res.delete();
                     },
                     child: ListTile(
-                      title: Text(res.title == null ? '' : res.title),
+                      title: Text(
+                        res.title == null ? '' : res.title,
+                        style: TextStyle(color: Color(0xFFB74093)),
+                      ),
                       subtitle: Text(
                         res.desc == null ? '' : res.desc,
                         overflow: TextOverflow.fade,
