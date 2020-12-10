@@ -46,8 +46,6 @@ class _ChangePageState extends State<ChangePage> {
               : _validateAndSave();
         }
 
-        // Замена события
-        // Navigator.of(context).pop();
         return false;
       },
       child: Scaffold(
@@ -63,8 +61,7 @@ class _ChangePageState extends State<ChangePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  // Text('$status - $id'),
-                  Text('$title - $desc'),
+                  // Text('$title - $desc'),
                   TextFormField(
                     autofocus: true,
                     initialValue: '',
@@ -132,7 +129,6 @@ class _ChangePageState extends State<ChangePage> {
           _onFormChange();
           break;
       }
-      // status == 'creating' ? _onFormSubmit() : _checkChanges();
     } else {
       print(
           'Форма заполнена неверно'); // желательно заменить на всплывающий бар
@@ -156,7 +152,6 @@ class _ChangePageState extends State<ChangePage> {
   void _checkChanges() {
     if (mainTitle != title || mainDesc != desc || mainColor != color) {
       _showMyDialog();
-      // _onFormChange();
     } else {
       _onFormChange();
     }
@@ -183,7 +178,6 @@ class _ChangePageState extends State<ChangePage> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          // title: Text('AlertDialog Title'),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
@@ -196,7 +190,6 @@ class _ChangePageState extends State<ChangePage> {
             TextButton(
               child: Text('Сохранить'),
               onPressed: () {
-                // Navigator.of(context).pop();
                 _onFormChange();
                 Navigator.of(context).pop();
               },

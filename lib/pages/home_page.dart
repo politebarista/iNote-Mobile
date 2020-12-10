@@ -41,7 +41,11 @@ class _HomePageState extends State<HomePage> {
                     },
                     child: ListTile(
                       title: Text(res.title == null ? '' : res.title),
-                      subtitle: Text(res.desc == null ? '' : res.desc),
+                      subtitle: Text(
+                        res.desc == null ? '' : res.desc,
+                        overflow: TextOverflow.fade,
+                        softWrap: false,
+                      ),
                     ),
                   ),
                 );

@@ -22,10 +22,28 @@ class ViewPage extends StatelessWidget {
           builder: (context, Box<Note> box, _) {
             return Container(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(box.getAt(args.id).title),
-                  Text(box.getAt(args.id).desc),
-                  Text(box.getAt(args.id).lastChange),
+                  Text(
+                    box.getAt(args.id).title,
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
+                  ),
+                  Divider(),
+                  Text(
+                    box.getAt(args.id).desc,
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  Divider(),
+                  Text(
+                    box.getAt(args.id).lastChange,
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
                 ],
               ),
             );
