@@ -14,7 +14,7 @@ class _ChangePageState extends State<ChangePage> {
 
   String title;
   String desc;
-  var color = 'red';
+  String color = '0000FF';
 
   int id;
   String status;
@@ -128,49 +128,49 @@ class _ChangePageState extends State<ChangePage> {
             children: <Widget>[
               SimpleDialogOption(
                 onPressed: () {
-                  color = 'red';
+                  color = '#F44336';
                   Navigator.of(context).pop();
                 },
                 child: const Text('Красный'),
               ),
               SimpleDialogOption(
                 onPressed: () {
-                  color = 'orange';
+                  color = '#FF9800';
                   Navigator.of(context).pop();
                 },
                 child: const Text('Оранжевый'),
               ),
               SimpleDialogOption(
                 onPressed: () {
-                  color = 'yellow';
+                  color = '#FFEB3B';
                   Navigator.of(context).pop();
                 },
                 child: const Text('Желтый'),
               ),
               SimpleDialogOption(
                 onPressed: () {
-                  color = 'green';
+                  color = '#4CAF50';
                   Navigator.of(context).pop();
                 },
                 child: const Text('Зеленый'),
               ),
               SimpleDialogOption(
                 onPressed: () {
-                  color = 'blue';
+                  color = '#2196F3';
                   Navigator.of(context).pop();
                 },
                 child: const Text('Синий'),
               ),
               SimpleDialogOption(
                 onPressed: () {
-                  color = 'purple';
+                  color = '#9C27B0';
                   Navigator.of(context).pop();
                 },
                 child: const Text('Фиолетовый'),
               ),
               SimpleDialogOption(
                 onPressed: () {
-                  color = 'white';
+                  color = '#FFFFFF';
                   Navigator.of(context).pop();
                 },
                 child: const Text('Белый'),

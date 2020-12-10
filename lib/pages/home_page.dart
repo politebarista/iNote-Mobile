@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:i_note_mobile/models/hex_color.dart';
 import 'package:i_note_mobile/models/note.dart';
 import 'package:i_note_mobile/models/screen_arguments.dart';
 
@@ -25,7 +26,6 @@ class _HomePageState extends State<HomePage> {
               itemCount: box.values.length,
               itemBuilder: (context, index) {
                 Note res = box.getAt(index);
-                // var color = Color(res.color);
                 return FlatButton(
                   onPressed: () {
                     Navigator.pushNamed(
@@ -43,7 +43,8 @@ class _HomePageState extends State<HomePage> {
                     child: ListTile(
                       title: Text(
                         res.title == null ? '' : res.title,
-                        style: TextStyle(color: Color(0xFFB74093)),
+                        // style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: HexColor(res.color)),
                       ),
                       subtitle: Text(
                         res.desc == null ? '' : res.desc,

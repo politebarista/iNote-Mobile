@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:i_note_mobile/models/hex_color.dart';
 import 'package:i_note_mobile/models/note.dart';
 import 'package:i_note_mobile/models/screen_arguments.dart';
 
@@ -44,7 +45,8 @@ class ViewPage extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
-                  Text(box.getAt(args.id).color),
+                  // Text(box.getAt(args.id).color),
+                  // Text('${HexColor('#FF0000')}'),
                 ],
               ),
             );
