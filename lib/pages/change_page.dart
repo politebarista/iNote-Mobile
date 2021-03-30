@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:i_note_mobile/models/note.dart';
+import 'package:intl/intl.dart';
 
 import '../models/screen_arguments.dart';
 
@@ -21,6 +22,8 @@ class _ChangePageState extends State<ChangePage> {
   String mainTitle;
   String mainDesc;
   String mainColor;
+  String timeButton = 'Когда напомнить?';
+  DateTime pickedDateTime;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -64,7 +67,7 @@ class _ChangePageState extends State<ChangePage> {
                   // Text('$title - $desc'),
                   TextFormField(
                     autofocus: true,
-                    initialValue: '',
+                    // initialValue: '',
                     decoration: const InputDecoration(
                       labelText: 'Название',
                     ),
@@ -80,7 +83,7 @@ class _ChangePageState extends State<ChangePage> {
                     },
                   ),
                   TextFormField(
-                    initialValue: '',
+                    initialValue: ' ',
                     decoration: const InputDecoration(
                       labelText: 'Текст',
                     ),
@@ -89,12 +92,27 @@ class _ChangePageState extends State<ChangePage> {
                         desc = value;
                       });
                     },
+                    maxLines: 10,
                     validator: (val) {
                       return val.trim().isEmpty
                           ? 'Текст не должен быть пустым'
                           : null;
                     },
                   ),
+                  TextButton(
+                      onPressed: () async {
+                        pickedDateTime = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime(2100),
+                        );
+                        timeButton = DateFormat('dd-MM-yyyy hh:mm').format(pickedDateTime).toString();
+                        setState(() {
+
+                        });
+                      },
+                      child: Text(timeButton))
                   // TextButton(
                   //   onPressed: _askedToLead,
                   //   child: Text('Цвет'),

@@ -40,10 +40,12 @@ class ViewPage extends StatelessWidget {
                     ),
                   ),
                   Divider(),
+                  Text('Напомнить *дата*'),
+                  Divider(),
                   Text(
-                    box.getAt(args.id).lastChange,
+                    'Дата последнего редактирования: ${box.getAt(args.id).lastChange}',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 14,
                     ),
                   ),
                   // Text(box.getAt(args.id).color),
