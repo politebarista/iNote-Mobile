@@ -26,8 +26,8 @@ class _HomePageState extends State<HomePage> {
               itemCount: box.values.length,
               itemBuilder: (context, index) {
                 Note res = box.getAt(index);
-                return FlatButton(
-                  onPressed: () {
+                return GestureDetector(
+                  onTap: () {
                     Navigator.pushNamed(
                       context,
                       '/view',
@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                       title: Text(
                         res.title == null ? '' : res.title,
                         // style: TextStyle(color: Colors.black),
-                        style: TextStyle(color: HexColor(res.color)),
+                        // style: TextStyle(color: HexColor(res.color)),
                       ),
                       subtitle: Text(
                         res.desc == null ? '' : res.desc,

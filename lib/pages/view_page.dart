@@ -29,7 +29,7 @@ class ViewPage extends StatelessWidget {
                     box.getAt(args.id).title,
                     style: TextStyle(
                       fontSize: 22,
-                      backgroundColor: HexColor(box.getAt(args.id).color),
+                      // backgroundColor: HexColor(box.getAt(args.id).color),
                     ),
                   ),
                   Divider(),

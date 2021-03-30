@@ -95,10 +95,10 @@ class _ChangePageState extends State<ChangePage> {
                           : null;
                     },
                   ),
-                  TextButton(
-                    onPressed: _askedToLead,
-                    child: Text('Цвет'),
-                  ),
+                  // TextButton(
+                  //   onPressed: _askedToLead,
+                  //   child: Text('Цвет'),
+                  // ),
                 ],
               ),
             ),
