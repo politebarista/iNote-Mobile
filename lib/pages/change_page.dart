@@ -106,6 +106,14 @@ class _ChangePageState extends State<ChangePage> {
                           initialDate: DateTime.now(),
                           firstDate: DateTime.now(),
                           lastDate: DateTime(2100),
+                          builder: (context, child) {
+                            return Theme(
+                              data: ThemeData(
+                                primarySwatch: Colors.amber,
+                              ), // This will change to light theme.
+                              child: child,
+                            );
+                          },
                         );
                         timeButton = DateFormat('dd-MM-yyyy hh:mm').format(pickedDateTime).toString();
                         setState(() {
