@@ -22,13 +22,16 @@ class _ChangePageState extends State<ChangePage> {
   String mainTitle;
   String mainDesc;
   String mainColor;
-  String timeButton = 'Когда напомнить?';
+  String pickedTime;
   DateTime pickedDateTime;
 
   final _formKey = GlobalKey<FormState>();
 
+  TextEditingController _dateTextFieldController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+
     final ScreenArguments args = ModalRoute.of(context).settings.arguments;
 
     if (args.status == 'changing') {
@@ -83,8 +86,8 @@ class _ChangePageState extends State<ChangePage> {
                     },
                   ),
                   TextFormField(
-                    initialValue: ' ',
-                    decoration: const InputDecoration(
+                    // initialValue: ' ',
+                    decoration: InputDecoration(
                       labelText: 'Текст',
                     ),
                     onChanged: (value) {
@@ -92,35 +95,42 @@ class _ChangePageState extends State<ChangePage> {
                         desc = value;
                       });
                     },
-                    maxLines: 10,
+                    minLines: 4,
+                    maxLines: 15,
                     validator: (val) {
                       return val.trim().isEmpty
                           ? 'Текст не должен быть пустым'
                           : null;
                     },
                   ),
-                  TextButton(
-                      onPressed: () async {
-                        pickedDateTime = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(2100),
-                          builder: (context, child) {
-                            return Theme(
-                              data: ThemeData(
-                                primarySwatch: Colors.amber,
-                              ), // This will change to light theme.
-                              child: child,
-                            );
-                          },
-                        );
-                        timeButton = DateFormat('dd-MM-yyyy hh:mm').format(pickedDateTime).toString();
-                        setState(() {
-
-                        });
-                      },
-                      child: Text(timeButton))
+                  TextFormField(
+                    controller: _dateTextFieldController,
+                    onTap: () async {
+                      pickedDateTime = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                        builder: (context, child) {
+                          return Theme(
+                            data: ThemeData(
+                              primarySwatch: Colors.amber,
+                            ), // This will change to light theme.
+                            child: child,
+                          );
+                        },
+                      );
+                      pickedTime = DateFormat('dd-MM-yyyy hh:mm')
+                          .format(pickedDateTime)
+                          .toString();
+                      if (pickedTime != null) {
+                        _dateTextFieldController.text = pickedTime;
+                      };
+                      setState(() {});
+                    },
+                    readOnly: true,
+                    decoration: InputDecoration(labelText: 'Когда напомнить?'),
+                  ),
                   // TextButton(
                   //   onPressed: _askedToLead,
                   //   child: Text('Цвет'),

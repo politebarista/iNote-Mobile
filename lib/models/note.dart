@@ -13,8 +13,16 @@ class Note extends HiveObject {
   String color;
   @HiveField(4)
   String lastChange;
+  @HiveField(5)
+  String whenToRemind;
 
-  Note({this.title = '', this.desc, this.color, this.lastChange});
+  Note({
+    this.title,
+    this.desc,
+    this.color,
+    this.lastChange,
+    this.whenToRemind,
+  });
 }
 
 // flutter packages pub run build_runner build --delete-conflicting-outputs

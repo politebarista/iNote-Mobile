@@ -21,13 +21,14 @@ class NoteAdapter extends TypeAdapter<Note> {
       desc: fields[2] as String,
       color: fields[3] as String,
       lastChange: fields[4] as String,
+      whenToRemind: fields[5] as String,
     )..id = fields[0] as String;
   }
 
   @override
   void write(BinaryWriter writer, Note obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -37,7 +38,9 @@ class NoteAdapter extends TypeAdapter<Note> {
       ..writeByte(3)
       ..write(obj.color)
       ..writeByte(4)
-      ..write(obj.lastChange);
+      ..write(obj.lastChange)
+      ..writeByte(5)
+      ..write(obj.whenToRemind);
   }
 
   @override
