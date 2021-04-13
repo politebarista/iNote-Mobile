@@ -22,8 +22,9 @@ class _ChangePageState extends State<ChangePage> {
   String mainTitle;
   String mainDesc;
   String mainColor;
-  String pickedTime;
-  DateTime pickedDateTime;
+  String pickedDateTime;
+  DateTime pickedDate;
+  TimeOfDay pickedTime;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -106,7 +107,7 @@ class _ChangePageState extends State<ChangePage> {
                   TextFormField(
                     controller: _dateTextFieldController,
                     onTap: () async {
-                      pickedDateTime = await showDatePicker(
+                      pickedDate = await showDatePicker(
                         context: context,
                         initialDate: DateTime.now(),
                         firstDate: DateTime.now(),
@@ -120,11 +121,12 @@ class _ChangePageState extends State<ChangePage> {
                           );
                         },
                       );
-                      pickedTime = DateFormat('dd-MM-yyyy hh:mm')
-                          .format(pickedDateTime)
-                          .toString();
+                      pickedTime = await showTimePicker(context: context, initialTime: TimeOfDay.now());
+                      pickedDateTime = '${DateFormat('dd/MM/yyyy')
+                          .format(pickedDate)
+                          .toString()} ${pickedTime.hour.toString()}:${pickedTime.minute.toString()}';
                       if (pickedTime != null) {
-                        _dateTextFieldController.text = pickedTime;
+                        _dateTextFieldController.text = pickedDateTime;
                       };
                       setState(() {});
                     },
