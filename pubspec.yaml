@@ -1,5 +1,5 @@
-name: empty_project
-description: A new Flutter project.
+name: i_note_mobile
+description: Mobile version of the iNote application.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
