@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i_note_mobile/modules/note_list/note_list_bloc.dart';
 import 'package:i_note_mobile/modules/note_list/note_list_widget.dart';
 
 void main() {
@@ -6,6 +8,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  var routes = {
+    '/': (context) =>
+        BlocProvider(
+          create: (_) => NoteListBloc(),
+          child: NoteListWidget(),
+        ),
+  };
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,6 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: _buildStartScreen(),
+      routes: routes,
     );
   }
 
@@ -23,4 +34,6 @@ class MyApp extends StatelessWidget {
       body: NoteListWidget(),
     );
   }
+
+  =
 }
