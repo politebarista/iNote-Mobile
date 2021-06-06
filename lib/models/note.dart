@@ -6,7 +6,7 @@ part 'note.g.dart';
 class Note {
   final int id;
   final String title;
-  final String description;
+  final String? description;
 
   Note(this.id, this.title, this.description);
 

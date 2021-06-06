@@ -24,3 +24,7 @@ class NoteListDefaultState extends NoteListState {
   @override
   List<Object> get props => [notes];
 }
+
+class NotesListEmptyState extends NoteListState {}
+
+class NotesListErrorState extends NoteListState {}

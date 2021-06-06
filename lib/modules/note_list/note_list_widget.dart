@@ -8,20 +8,27 @@ import 'package:i_note_mobile/modules/note_list/note_row_widget.dart';
 class NoteListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NoteListBloc, NoteListState>(
-      builder: (context, state) {
-        if (state is NoteListLoadingNotesState) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (state is NoteListDefaultState) {
-          return _buildNotesList(state);
-        } else {
-          return Center(
-            child: Text('ошибка какая-то'),
-          );
-        }
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('iNote'),
+      ),
+      body: BlocBuilder<NoteListBloc, NoteListState>(
+        builder: (context, state) {
+          if (state is NoteListLoadingNotesState) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is NoteListDefaultState) {
+            return _buildNotesList(state);
+          } else if (state is NotesListEmptyState) {
+            return Center(child: Text('To bad, the list of notes is empty.'));
+          } else if (state is NotesListErrorState) {
+            return Center(child: Text('Oppps. Some went wrong.'));
+          } else {
+            return Center(child: Text('Some mistakes. So sorry.'));
+          }
+        },
+      ),
     );
   }
 
