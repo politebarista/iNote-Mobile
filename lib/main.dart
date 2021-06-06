@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:i_note_mobile/modules/note_list/note_list_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,9 +20,7 @@ class MyApp extends StatelessWidget {
   Widget _buildStartScreen() {
     return Scaffold(
       appBar: AppBar(title: Text('iNote-Mobile')),
-      body: Center(
-        child: Text("Welcome to iNote-Mobile"),
-      ),
+      body: NoteListWidget(),
     );
   }
 }
