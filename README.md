@@ -1,6 +1,6 @@
-# i_note_mobile
+# empty_project
 
-Mobile version of the iNote application
+A new Flutter project.
 
 ## Getting Started
 

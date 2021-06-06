@@ -22,7 +22,6 @@
 
 # Flutter/Dart/Pub related
 **/doc/api/
-**/ios/Flutter/.last_build_id
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
@@ -30,12 +29,71 @@
 .pub-cache/
 .pub/
 /build/
+**/generated_plugin_registrant.dart
 
-# Web related
-lib/generated_plugin_registrant.dart
+# Android related
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
 
-# Symbolication related
-app.*.symbols
+# iOS/XCode related
+**/ios/**/*.mode1v3
+**/ios/**/*.mode2v3
+**/ios/**/*.moved-aside
+**/ios/**/*.pbxuser
+**/ios/**/*.perspectivev3
+**/ios/**/*sync/
+**/ios/**/.sconsign.dblite
+**/ios/**/.tags*
+**/ios/**/.vagrant/
+**/ios/**/DerivedData/
+**/ios/**/Icon?
+**/ios/**/Pods/
+**/ios/**/.symlinks/
+**/ios/**/profile
+**/ios/**/xcuserdata
+**/ios/.generated/
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
 
-# Obfuscation related
-app.*.map.json
+# Exceptions to above rules.
+!**/ios/**/default.mode1v3
+!**/ios/**/default.mode2v3
+!**/ios/**/default.pbxuser
+!**/ios/**/default.perspectivev3
+!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+# Ignore everything in swagger_api
+swagger_api/*
+
+# But not these
+!swagger_api/swagger_generate.sh
+!swagger_api/swagger-codegen-cli.jar
+!swagger_api/swagger.json
+*.flutter-plugins-dependencies
+
+/screenshots/
+/.fvm/flutter_sdk/
+
+android/app/src/main/assets/crashlytics-build.properties
+
+android/app/src/main/res/values/com_crashlytics_export_strings.xml
+
+android/fabric.properties
+
+settings_files
+
+*.summary
+*.inject.dart
+*.g.dart
+ios/Flutter/flutter_export_environment.sh
