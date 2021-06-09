@@ -6,7 +6,12 @@ abstract class NoteListEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class NoteListGetNotesEvent extends NoteListEvent {
+class NoteListGetNotesEvent extends NoteListEvent {}
+
+class NoteListDeleteNoteEvent extends NoteListEvent{
+  final int id;
+
+  NoteListDeleteNoteEvent(this.id);
 }
 
 abstract class NoteListState extends Equatable {

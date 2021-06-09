@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:i_note_mobile/models/note.dart';
 import 'package:i_note_mobile/modules/note_list/note_list_bloc.dart';
 import 'package:i_note_mobile/modules/note_list/note_list_entities.dart';
 import 'package:i_note_mobile/modules/note_list/note_row_widget.dart';
 
-class NoteListWidget extends StatelessWidget {
+import 'note_list_delegate.dart';
+
+class NoteListWidget extends StatelessWidget implements NoteListDelegate {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,10 +37,15 @@ class NoteListWidget extends StatelessWidget {
     return Container(
       child: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
-          return NoteRowWidget(state.notes[index]);
+          return NoteRowWidget(state.notes[index], this);
         },
         itemCount: state.notes.length,
       ),
     );
   }
+
+  void deleteNote(BuildContext context, int id) {
+    context.read<NoteListBloc>().add(NoteListDeleteNoteEvent(id));
+  }
 }
+

@@ -11,23 +11,26 @@ class NoteListBloc extends Bloc<NoteListEvent, NoteListState> {
   @override
   Stream<NoteListState> mapEventToState(NoteListEvent event) async* {
     if (event is NoteListGetNotesEvent) {
-      try{
+      // try {
         List<Note> notes = await _takeNotes();
         if (notes.isEmpty) {
           yield NotesListEmptyState();
         } else {
           yield NoteListDefaultState(notes);
         }
-      } catch(_) {
-        yield NotesListErrorState();
-      }
+      // } catch (e) {
+      //   print(e);
+      //   yield NotesListErrorState();
+      // }
     } else {
       throw UnimplementedError();
     }
   }
 
   Future<List<Note>> _takeNotes() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:5000/getNotes'));
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2:5000/getNotes')).timeout(
+              Duration(seconds: 15));
     List jsonedResponse = json.decode(response.body);
     List<Note> notes =
         jsonedResponse.map((note) => Note.fromJson(note)).toList();
