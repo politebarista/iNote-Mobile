@@ -11,17 +11,17 @@ class NoteListBloc extends Bloc<NoteListEvent, NoteListState> {
   @override
   Stream<NoteListState> mapEventToState(NoteListEvent event) async* {
     if (event is NoteListGetNotesEvent) {
-      // try {
+      try {
         List<Note> notes = await _takeNotes();
         if (notes.isEmpty) {
           yield NotesListEmptyState();
         } else {
           yield NoteListDefaultState(notes);
         }
-      // } catch (e) {
-      //   print(e);
-      //   yield NotesListErrorState();
-      // }
+      } catch (e) {
+        print(e);
+        yield NotesListErrorState();
+      }
     } else {
       throw UnimplementedError();
     }
