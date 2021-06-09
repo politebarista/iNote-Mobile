@@ -14,6 +14,8 @@ class NoteListDeleteNoteEvent extends NoteListEvent{
   NoteListDeleteNoteEvent(this.id);
 }
 
+class NoteListUpdateEvent extends NoteListEvent {}
+
 abstract class NoteListState extends Equatable {
   @override
   List<Object> get props => [];

@@ -20,7 +20,7 @@ class NoteListWidget extends StatelessWidget implements NoteListDelegate {
               child: CircularProgressIndicator(),
             );
           } else if (state is NoteListDefaultState) {
-            return _buildNotesList(state);
+            return _buildNotesList(context, state);
           } else if (state is NotesListEmptyState) {
             return Center(child: Text('To bad, the list of notes is empty.'));
           } else if (state is NotesListErrorState) {
@@ -33,14 +33,19 @@ class NoteListWidget extends StatelessWidget implements NoteListDelegate {
     );
   }
 
-  Widget _buildNotesList(NoteListDefaultState state) {
-    return Container(
-      child: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return NoteRowWidget(state.notes[index], this);
-        },
-        itemCount: state.notes.length,
+  Widget _buildNotesList(BuildContext context, NoteListDefaultState state) {
+    return RefreshIndicator(
+      child: Container(
+        child: ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            return NoteRowWidget(state.notes[index], this);
+          },
+          itemCount: state.notes.length,
+        ),
       ),
+      onRefresh: () async {
+        context.read<NoteListBloc>().add(NoteListUpdateEvent());
+      },
     );
   }
 

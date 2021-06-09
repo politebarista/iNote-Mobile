@@ -22,7 +22,11 @@ class NoteListBloc extends Bloc<NoteListEvent, NoteListState> {
         print(e);
         yield NotesListErrorState();
       }
-    } else {
+    } else if (event is NoteListUpdateEvent) {
+      yield NoteListLoadingNotesState();
+      add(NoteListGetNotesEvent());
+    }
+    else {
       throw UnimplementedError();
     }
   }
