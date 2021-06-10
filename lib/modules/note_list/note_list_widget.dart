@@ -22,11 +22,20 @@ class NoteListWidget extends StatelessWidget implements NoteListDelegate {
           } else if (state is NoteListDefaultState) {
             return _buildNotesList(context, state);
           } else if (state is NotesListEmptyState) {
-            return Center(child: Text('To bad, the list of notes is empty.'));
+            return _buildRefreshWidget(
+              context,
+              Text('To bad, the list of notes is empty.'),
+            );
           } else if (state is NotesListErrorState) {
-            return Center(child: Text('Oppps. Some went wrong.'));
+            return _buildRefreshWidget(
+              context,
+              Text('Oppps. Some went wrong.'),
+            );
           } else {
-            return Center(child: Text('Some mistakes. So sorry.'));
+            return _buildRefreshWidget(
+              context,
+              Text('Some mistakes. So sorry.'),
+            );
           }
         },
       ),
@@ -34,18 +43,23 @@ class NoteListWidget extends StatelessWidget implements NoteListDelegate {
   }
 
   Widget _buildNotesList(BuildContext context, NoteListDefaultState state) {
-    return RefreshIndicator(
-      child: Container(
-        child: ListView.builder(
-          itemBuilder: (BuildContext context, int index) {
-            return NoteRowWidget(state.notes[index], this);
-          },
-          itemCount: state.notes.length,
-        ),
+    return _buildRefreshWidget(
+      context,
+      ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          return NoteRowWidget(state.notes[index], this);
+        },
+        itemCount: state.notes.length,
       ),
+    );
+  }
+
+  Widget _buildRefreshWidget(BuildContext context, Widget child) {
+    return RefreshIndicator(
       onRefresh: () async {
         context.read<NoteListBloc>().add(NoteListUpdateEvent());
       },
+      child: child,
     );
   }
 
@@ -53,4 +67,3 @@ class NoteListWidget extends StatelessWidget implements NoteListDelegate {
     context.read<NoteListBloc>().add(NoteListDeleteNoteEvent(id));
   }
 }
-

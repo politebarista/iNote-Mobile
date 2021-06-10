@@ -22,11 +22,14 @@ class NoteListBloc extends Bloc<NoteListEvent, NoteListState> {
         print(e);
         yield NotesListErrorState();
       }
+    } else if (event is NoteListDeleteNoteEvent) {
+      yield NoteListLoadingNotesState();
+      await _deleteNote(event.id);
+      add(NoteListGetNotesEvent()); // заменить простым удалением в списке
     } else if (event is NoteListUpdateEvent) {
       yield NoteListLoadingNotesState();
       add(NoteListGetNotesEvent());
-    }
-    else {
+    } else {
       throw UnimplementedError();
     }
   }
@@ -39,5 +42,18 @@ class NoteListBloc extends Bloc<NoteListEvent, NoteListState> {
     List<Note> notes =
         jsonedResponse.map((note) => Note.fromJson(note)).toList();
     return notes;
+  }
+
+  Future<String> _deleteNote(int id) async {
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:5000/deleteNote'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, int>{
+        'id': id,
+      }),
+    );
+    return 'hello';
   }
 }
