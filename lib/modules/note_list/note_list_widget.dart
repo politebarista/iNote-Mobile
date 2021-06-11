@@ -39,6 +39,10 @@ class NoteListWidget extends StatelessWidget implements NoteListDelegate {
           }
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => Navigator.pushNamed(context, 'createNote'),
+      ),
     );
   }
 
