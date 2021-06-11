@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:i_note_mobile/models/note.dart';
+import 'package:i_note_mobile/data/entites/note.dart';
 import 'package:i_note_mobile/modules/note_list/note_list_entities.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,9 +23,7 @@ class NoteListBloc extends Bloc<NoteListEvent, NoteListState> {
         yield NotesListErrorState();
       }
     } else if (event is NoteListDeleteNoteEvent) {
-      yield NoteListLoadingNotesState();
       await _deleteNote(event.id);
-      add(NoteListGetNotesEvent()); // заменить простым удалением в списке
     } else if (event is NoteListUpdateEvent) {
       yield NoteListLoadingNotesState();
       add(NoteListGetNotesEvent());
@@ -44,7 +42,7 @@ class NoteListBloc extends Bloc<NoteListEvent, NoteListState> {
     return notes;
   }
 
-  Future<String> _deleteNote(int id) async {
+  Future<void> _deleteNote(int id) async {
     final response = await http.post(
       Uri.parse('http://10.0.2.2:5000/deleteNote'),
       headers: <String, String>{
@@ -54,6 +52,5 @@ class NoteListBloc extends Bloc<NoteListEvent, NoteListState> {
         'id': id,
       }),
     );
-    return 'hello';
   }
 }

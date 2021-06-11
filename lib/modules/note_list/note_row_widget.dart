@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:i_note_mobile/common/ui/indent_widget.dart';
-import 'package:i_note_mobile/models/note.dart';
+import 'package:i_note_mobile/data/entites/note.dart';
+import 'dart:math' as math;
 
 import 'note_list_delegate.dart';
 
@@ -34,13 +36,26 @@ class NoteRowWidget extends StatelessWidget {
       ),
       child: IndentWidget(
         child: Container(
-          height: 50,
+          height: 55,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(note.id.toString()),
-              SizedBox(width: 16),
-              Text(note.title),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    note.title,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  if (note.description != null && note.description!.isNotEmpty)...[
+                    Text(
+                      note.description!,
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ],
+              ),
             ],
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:i_note_mobile/models/note.dart';
+import 'package:i_note_mobile/data/entites/note.dart';
 
 abstract class NoteListEvent extends Equatable {
   @override
