@@ -11,7 +11,12 @@ class NoteCreationBloc extends Bloc<NoteCreationEvent, NoteCreationState> {
 
   Stream<NoteCreationState> mapEventToState(NoteCreationEvent event) async* {
     if (event is NoteCreationCreateNoteEvent) {
-      _createNewNote(event.note);
+      try{
+        await _createNewNote(event.note);
+        yield NoteCreationNoteCreateSuccessState();
+      } catch(_) {
+        yield NoteCreationNoteCreateFailureState();
+      }
     } else {
       throw UnimplementedError();
     }
@@ -27,6 +32,6 @@ class NoteCreationBloc extends Bloc<NoteCreationEvent, NoteCreationState> {
         'title': note.title,
         'description': note.description,
       }),
-    );
+    ).timeout(Duration(seconds: 5));
   }
 }

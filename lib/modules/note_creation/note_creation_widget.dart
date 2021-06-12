@@ -15,7 +15,10 @@ class NoteCreationWidget extends StatelessWidget {
       appBar: AppBar(
         title: Text('Создание заметки'),
       ),
-      body: BlocBuilder<NoteCreationBloc, NoteCreationState>(
+      body: BlocConsumer<NoteCreationBloc, NoteCreationState>(
+        buildWhen: (previous, current) {
+          return current is NoteCreationInitialState;
+        },
         builder: (context, state) {
           if (state is NoteCreationInitialState) {
             return _buildNoteCreationWiget(context);
@@ -23,6 +26,26 @@ class NoteCreationWidget extends StatelessWidget {
             return Center(
               child: Text('Some went wrong'),
             );
+          }
+        },
+        listenWhen: (previous, current) {
+          return current is NoteCreationNoteCreateFailureState ||
+              current is NoteCreationNoteCreateSuccessState;
+        },
+        listener: (context, state) {
+          if (state is NoteCreationNoteCreateFailureState) {
+            final snackBar = SnackBar(
+              content: Text('Заметка не была создана.'),
+              backgroundColor: Colors.red,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          } else if (state is NoteCreationNoteCreateSuccessState) {
+            final snackBar = SnackBar(
+              content: Text('Заметка была создана.'),
+              backgroundColor: Colors.lightGreen,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            Navigator.pop(context);
           }
         },
       ),
