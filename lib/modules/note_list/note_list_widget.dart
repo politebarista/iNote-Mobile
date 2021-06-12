@@ -45,14 +45,17 @@ class NoteListWidget extends StatelessWidget implements NoteListDelegate {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return resolver.getNoteCreationWidget();
-            },
-          ),
-        ),
+        onPressed: () async {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return resolver.getNoteCreationWidget();
+              },
+            ),
+          );
+          context.read<NoteListBloc>().add(NoteListUpdateEvent());
+        },
       ),
     );
   }

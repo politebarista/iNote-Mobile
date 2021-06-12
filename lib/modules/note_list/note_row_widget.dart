@@ -61,7 +61,7 @@ class NoteRowWidget extends StatelessWidget {
         ),
       ),
       onDismissed: (direction) async {
-        _noteListDelegate.deleteNote(context, note.id);
+        _noteListDelegate.deleteNote(context, note.id!);
       },
     );
   }
