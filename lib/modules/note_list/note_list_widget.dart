@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i_note_mobile/meta/resolver.dart';
 import 'package:i_note_mobile/modules/note_list/note_list_bloc.dart';
 import 'package:i_note_mobile/modules/note_list/note_list_entities.dart';
 import 'package:i_note_mobile/modules/note_list/note_row_widget.dart';
+import 'package:provider/provider.dart';
 
 import 'note_list_delegate.dart';
 
 class NoteListWidget extends StatelessWidget implements NoteListDelegate {
   @override
   Widget build(BuildContext context) {
+    final resolver = Provider.of<Resolver>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('iNote'),
@@ -29,19 +33,26 @@ class NoteListWidget extends StatelessWidget implements NoteListDelegate {
           } else if (state is NotesListErrorState) {
             return _buildRefreshWidget(
               context,
-              Text('Oppps. Some went wrong.'),
+              Center(child: Text('Oppps. Some went wrong.')),
             );
           } else {
             return _buildRefreshWidget(
               context,
-              Text('Some mistakes. So sorry.'),
+              Center(child: Text('Some mistakes. So sorry.')),
             );
           }
         },
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => Navigator.pushNamed(context, 'createNote'),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return resolver.getNoteCreationWidget();
+            },
+          ),
+        ),
       ),
     );
   }

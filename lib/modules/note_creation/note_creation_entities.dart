@@ -12,8 +12,6 @@ abstract class NoteCreationState extends Equatable {
 }
 
 class NoteCreationInitialState extends NoteCreationState {
-  final Note note;
-
-  NoteCreationInitialState(this.note);
+  NoteCreationInitialState();
 }
 
