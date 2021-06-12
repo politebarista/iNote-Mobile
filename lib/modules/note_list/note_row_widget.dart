@@ -35,29 +35,41 @@ class NoteRowWidget extends StatelessWidget {
         ),
       ),
       child: IndentWidget(
-        child: Container(
-          height: 55,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            return Container(
+              height: 55,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    note.title,
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  if (note.description != null && note.description!.isNotEmpty)...[
-                    Text(
-                      note.description!,
-                      style: TextStyle(fontSize: 16),
+                  SizedBox(
+                    width: constraints.maxWidth,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          note.title,
+                          style: TextStyle(fontSize: 18),
+                          softWrap: false,
+                          overflow: TextOverflow.fade,
+                        ),
+                        if (note.description != null &&
+                            note.description!.isNotEmpty) ...[
+                          Text(
+                            note.description!,
+                            style: TextStyle(fontSize: 16),
+                            softWrap: false,
+                            overflow: TextOverflow.fade,
+                          ),
+                        ],
+                      ],
                     ),
-                  ],
+                  ),
                 ],
               ),
-            ],
-          ),
+            );
+          },
         ),
       ),
       onDismissed: (direction) async {

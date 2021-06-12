@@ -11,10 +11,10 @@ class NoteCreationBloc extends Bloc<NoteCreationEvent, NoteCreationState> {
 
   Stream<NoteCreationState> mapEventToState(NoteCreationEvent event) async* {
     if (event is NoteCreationCreateNoteEvent) {
-      try{
+      try {
         await _createNewNote(event.note);
         yield NoteCreationNoteCreateSuccessState();
-      } catch(_) {
+      } catch (_) {
         yield NoteCreationNoteCreateFailureState();
       }
     } else {
@@ -23,15 +23,19 @@ class NoteCreationBloc extends Bloc<NoteCreationEvent, NoteCreationState> {
   }
 
   Future<void> _createNewNote(Note note) async {
-    await http.post(
-      Uri.parse("${ConnectionTools.url}/addNote"),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String?>{
-        'title': note.title,
-        'description': note.description,
-      }),
-    ).timeout(Duration(seconds: 5));
+    await http
+        .post(
+          Uri.parse("${ConnectionTools.url}/addNote"),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(<String, String?>{
+            'title': note.title,
+            'description': note.description,
+          }),
+        )
+        .timeout(
+          Duration(seconds: 5),
+        );
   }
 }
