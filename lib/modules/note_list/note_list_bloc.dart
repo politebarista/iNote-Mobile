@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i_note_mobile/data/entites/note.dart';
+import 'package:i_note_mobile/meta/connection_tools.dart';
 import 'package:i_note_mobile/modules/note_list/note_list_entities.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,7 +35,7 @@ class NoteListBloc extends Bloc<NoteListEvent, NoteListState> {
 
   Future<List<Note>> _takeNotes() async {
     final response =
-        await http.get(Uri.parse('http://10.0.2.2:5000/getNotes')).timeout(
+        await http.get(Uri.parse('${ConnectionTools.url}/getNotes')).timeout(
               Duration(seconds: 15));
     List jsonedResponse = json.decode(response.body);
     List<Note> notes =
@@ -43,8 +44,8 @@ class NoteListBloc extends Bloc<NoteListEvent, NoteListState> {
   }
 
   Future<void> _deleteNote(int id) async {
-    final response = await http.post(
-      Uri.parse('http://10.0.2.2:5000/deleteNote'),
+    await http.post(
+      Uri.parse('${ConnectionTools.url}/deleteNote'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
