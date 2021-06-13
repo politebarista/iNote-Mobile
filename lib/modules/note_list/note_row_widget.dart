@@ -5,7 +5,9 @@ import 'package:i_note_mobile/data/entites/note.dart';
 import 'package:i_note_mobile/meta/resolver.dart';
 import 'package:provider/provider.dart';
 
+import 'note_list_bloc.dart';
 import 'note_list_delegate.dart';
+import 'note_list_entities.dart';
 
 class NoteRowWidget extends StatelessWidget {
   final Note note;
@@ -76,8 +78,8 @@ class NoteRowWidget extends StatelessWidget {
             },
           ),
         ),
-        onTap: () {
-          Navigator.push(
+        onTap: () async {
+          await Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
@@ -85,6 +87,7 @@ class NoteRowWidget extends StatelessWidget {
               },
             ),
           );
+          context.read<NoteListBloc>().add(NoteListUpdateEvent());
         },
       ),
       onDismissed: (direction) async {

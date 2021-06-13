@@ -6,6 +6,11 @@ abstract class DetailsNoteEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class DetailsNoteUpdateEvent extends DetailsNoteEvent {
+  final int id;
+
+  DetailsNoteUpdateEvent(this.id);
+}
 
 abstract class DetailsNoteState extends Equatable {
   @override
@@ -20,3 +25,11 @@ class DetailsNoteInitialState extends DetailsNoteState {
   @override
   List<Object> get props => [];
 }
+
+class DetailsNoteUpdateSuccessState extends DetailsNoteState {
+  final Note note;
+
+  DetailsNoteUpdateSuccessState(this.note);
+}
+
+class DetailsNoteUpdateFailureState extends DetailsNoteState {}

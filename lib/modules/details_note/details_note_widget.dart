@@ -32,8 +32,8 @@ class DetailsNoteWidget extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton(
             child: Icon(Icons.edit),
-            onPressed: () {
-              Navigator.push(
+            onPressed: () async {
+              await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) {
@@ -41,6 +41,9 @@ class DetailsNoteWidget extends StatelessWidget {
                   },
                 ),
               );
+              context
+                  .read<DetailsNoteBloc>()
+                  .add(DetailsNoteUpdateEvent(state.note.id!));
             },
           ),
         );
