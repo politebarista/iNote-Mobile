@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i_note_mobile/common/ui/specific_app_bar.dart';
 import 'package:i_note_mobile/meta/resolver.dart';
 import 'package:i_note_mobile/modules/note_list/note_list_bloc.dart';
 import 'package:i_note_mobile/modules/note_list/note_list_entities.dart';
@@ -14,9 +15,7 @@ class NoteListWidget extends StatelessWidget implements NoteListDelegate {
     final resolver = Provider.of<Resolver>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('iNote'),
-      ),
+      appBar: SpecificAppBar('iNote'),
       body: BlocBuilder<NoteListBloc, NoteListState>(
         builder: (context, state) {
           if (state is NoteListLoadingNotesState) {
