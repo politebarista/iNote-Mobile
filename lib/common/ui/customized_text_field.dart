@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class CustomizedTextField extends StatelessWidget {
   final TextEditingController controller;
+  final String? labelText;
   final String? hintText;
 
   CustomizedTextField({
     required this.controller,
+    this.labelText,
     this.hintText,
   });
 
@@ -14,6 +16,7 @@ class CustomizedTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
+        labelText: labelText,
         hintText: hintText,
       ),
     );
