@@ -25,7 +25,7 @@ class NoteEditingBloc extends Bloc<NoteEditingEvent, NoteEditingState> {
   }
   
   Future<void> _updateNote(Note note) async {
-    http.post(
+    await http.post(
       Uri.parse("${ConnectionTools.url}/editNote"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
