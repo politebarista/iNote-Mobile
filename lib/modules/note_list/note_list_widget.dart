@@ -25,17 +25,17 @@ class NoteListWidget extends StatelessWidget implements NoteListDelegate {
           } else if (state is NoteListDefaultState) {
             return _buildNotesList(context, state);
           } else if (state is NotesListEmptyState) {
-            return _buildRefreshWidget(
+            return _buildSingleChildRefreshWidget(
               context,
               Text('To bad, the list of notes is empty.'),
             );
           } else if (state is NotesListErrorState) {
-            return _buildRefreshWidget(
+            return _buildSingleChildRefreshWidget(
               context,
               Center(child: Text('Oppps. Some went wrong.')),
             );
           } else {
-            return _buildRefreshWidget(
+            return _buildSingleChildRefreshWidget(
               context,
               Center(child: Text('Some mistakes. So sorry.')),
             );
@@ -60,7 +60,7 @@ class NoteListWidget extends StatelessWidget implements NoteListDelegate {
   }
 
   Widget _buildNotesList(BuildContext context, NoteListDefaultState state) {
-    return _buildRefreshWidget(
+    return _buildListRefreshWidget(
       context,
       ListView.builder(
         itemBuilder: (BuildContext context, int index) {
@@ -71,12 +71,31 @@ class NoteListWidget extends StatelessWidget implements NoteListDelegate {
     );
   }
 
-  Widget _buildRefreshWidget(BuildContext context, Widget child) {
+  Widget _buildListRefreshWidget(BuildContext context, Widget child) {
     return RefreshIndicator(
       onRefresh: () async {
         context.read<NoteListBloc>().add(NoteListUpdateEvent());
       },
       child: child,
+    );
+  }
+
+  Widget _buildSingleChildRefreshWidget(BuildContext context, Widget child) {
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<NoteListBloc>().add(NoteListUpdateEvent());
+      },
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            physics: AlwaysScrollableScrollPhysics(),
+            child: SizedBox(
+              height: constraints.maxHeight,
+              child: child,
+            ),
+          );
+        },
+      ),
     );
   }
 
