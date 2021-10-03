@@ -11,18 +11,6 @@ class SpecificAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
-      actions: [
-        ElevatedButton(
-          onPressed: () {},
-          child: Icon(Icons.account_circle, size: 28),
-          style: ElevatedButton.styleFrom(
-            fixedSize: Size(12,12),
-            padding: EdgeInsets.all(10),
-            shadowColor: Colors.transparent,
-            shape: CircleBorder(),
-          ),
-        ),
-      ],
     );
   }
 }
