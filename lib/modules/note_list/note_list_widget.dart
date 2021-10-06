@@ -12,7 +12,7 @@ import 'note_list_delegate.dart';
 class NoteListWidget extends StatelessWidget implements NoteListDelegate {
   @override
   Widget build(BuildContext context) {
-    final resolver = Provider.of<Resolver>(context);
+    final resolver = Provider.of<BaseResolver>(context);
 
     return Scaffold(
       appBar: SpecificAppBar('iNote'),

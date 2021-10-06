@@ -10,7 +10,7 @@ import 'details_note_bloc.dart';
 class DetailsNoteWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final resolver = Provider.of<Resolver>(context);
+    final resolver = Provider.of<BaseResolver>(context);
 
     return BlocBuilder<DetailsNoteBloc, DetailsNoteState>(
         builder: (context, state) {
