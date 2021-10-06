@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:i_note_mobile/data/api/project_api.dart';
 import 'package:i_note_mobile/data/entites/note.dart';
 import 'package:i_note_mobile/modules/details_note/details_note_bloc.dart';
 import 'package:i_note_mobile/modules/details_note/details_note_widget.dart';
@@ -11,7 +12,7 @@ import 'package:i_note_mobile/modules/note_list/note_list_bloc.dart';
 import 'package:i_note_mobile/modules/note_list/note_list_entities.dart';
 import 'package:i_note_mobile/modules/note_list/note_list_widget.dart';
 
-abstract class Resolver {
+abstract class BaseResolver {
   Widget getNoteListWidget();
 
   Widget getNoteCreationWidget();
@@ -21,11 +22,15 @@ abstract class Resolver {
   Widget getNoteEditingWidget(Note note);
 }
 
-class DefaultResolver implements Resolver {
+class Resolver implements BaseResolver {
   @override
   Widget getNoteListWidget() {
     return BlocProvider(
-      create: (_) => NoteListBloc()..add(NoteListGetNotesEvent()),
+      create: (context) => NoteListBloc(
+        context.read<BaseProjectApi>(),
+      )..add(
+          NoteListGetNotesEvent(),
+        ),
       child: NoteListWidget(),
     );
   }
@@ -33,7 +38,9 @@ class DefaultResolver implements Resolver {
   @override
   Widget getNoteCreationWidget() {
     return BlocProvider(
-      create: (_) => NoteCreationBloc(),
+      create: (context) => NoteCreationBloc(
+        context.read<BaseProjectApi>(),
+      ),
       child: NoteCreationWidget(),
     );
   }
@@ -41,7 +48,10 @@ class DefaultResolver implements Resolver {
   @override
   Widget getDetailsNote(Note note) {
     return BlocProvider(
-      create: (_) => DetailsNoteBloc(note),
+      create: (context) => DetailsNoteBloc(
+        note,
+        context.read<BaseProjectApi>(),
+      ),
       child: DetailsNoteWidget(),
     );
   }
@@ -49,7 +59,10 @@ class DefaultResolver implements Resolver {
   @override
   Widget getNoteEditingWidget(Note note) {
     return BlocProvider(
-      create: (_) => NoteEditingBloc(note),
+      create: (context) => NoteEditingBloc(
+        note,
+        context.read<BaseProjectApi>(),
+      ),
       child: NoteEditingWidget(),
     );
   }

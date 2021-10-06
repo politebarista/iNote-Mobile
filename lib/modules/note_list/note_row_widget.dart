@@ -25,7 +25,7 @@ class NoteRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final resolver = Provider.of<Resolver>(context);
+    final resolver = Provider.of<BaseResolver>(context);
 
     return Dismissible(
       key: Key(note.id.toString()),
